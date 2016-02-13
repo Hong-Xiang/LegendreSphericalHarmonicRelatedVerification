@@ -1,0 +1,45 @@
+\documentclass[•]{article}
+\begin{document}
+\section{Legendre polynomial}
+Associated Legendre Polynomials $P_l^m(x)$ are solutions of the differential equation
+\begin{equation}
+(1 - x^2) \frac{d^2 P_l^m(x)}{ dx^2 }P_l^m(x) - 2x \frac{d}{dx
+} P_l^m(x) +
+( l(l+1) - m^2 / (1 - x^2) ) P_l^m(x) = 0
+\end{equation}
+Calculate command:
+\begin{itemize}
+\item MATLAB legendre(l,x)
+\item Boost 
+\end{itemize}
+
+\subsection{Full Normalization}
+The full normalization form of Legendre polynomial is
+\begin{equation}
+N_l^m(x) = (-1)^m \sqrt{(l + 1/2) * (l-m)! / (l+m)!} P_l^m(x)
+\end{equation}
+and have the property
+\begin{equation}
+\int_{-1}^1 ( N_l^m(x) )^2 dx = 1
+\end{equation}
+The associated Legendre polynomials suitable for calculating spherical harmonics are defined as 
+\begin{equation}
+Y_l^m(x) = (-1)^m \sqrt{(2l + 1) * (l-m)! / (4 \pi) / (l+m)!} P_l^m(x)
+\end{equation}
+\subsection{Derivation of Legendre Polynomial, Jacobi Polynomial}
+The derivation of Legendre Polynomial is defined as
+\begin{equation}
+\frac{d P_l(x)}{dx} =  J_{(l-1)}^{(1,1)}(x)
+\end{equation}
+\section{Spherical harmonic functions}
+\section{Relations}
+\subsection{Spherical Harmonic Addition Theorem}
+A formula also known as the Legendre addition theorem which is derived by finding Green's functions for the spherical harmonic expansion and equating them to the generating function for Legendre polynomials. When $\gamma$ is defined by
+\begin{equation}
+\cos \gamma := \cos \theta_1 \cos \theta_2 + \sin \theta_1 \sin \theta_2 \cos(\phi_1-\phi_2)
+\end{equation}
+The Legendre polynomial of argument $\gamma$ is given by
+\begin{equation}
+P_l(\cos \gamma) = \frac{4\pi}{2l+1}\sum_{m=-l}^l (-1)^m Y^m_l(\theta_1,\phi_1) Y^m_l(\theta_2, \phi_2)
+\end{equation}
+\end{document}
