@@ -4,13 +4,10 @@ MaxN = 8;
 %% Test N-order Polynomial
 N = 5;
 NTests = 10;
-
 coes = zeros(MaxN,1);
-[x, w] = GaussianQ(-1, 1, 0, 0, 10);
+[x, w] = GaussianQ(-1, 1, 0, 0, 2*MaxN);
 for itest = 1 : NTests
     a = rand(N,1);
-    
-    
     f0 = PolyBasic(x, a);
     for i = 0 : MaxN
         coes(i+1) = Coefficient(i, f0, x, w);
@@ -24,7 +21,7 @@ end
 
 %% Test Sin
 coes = zeros(MaxN,1);
-[x, w] = GaussianQ(-1, 1, 0, 0, 10);
+[x, w] = GaussianQ(-1, 1, 0, 0, 2*MaxN);
 f0 = sin(x);
 for i = 0 : MaxN
     coes(i+1) = Coefficient(i, f0, x, w);

@@ -11,7 +11,7 @@ for l0 = 0 : MaxL
         mvalue(ilm(l0,m0)) = m0;
     end
 end
-M = 20;
+M = 40;
 s = FEMAngularGrid(M);
 W = s.w;
 mu = s.ang(:,1);

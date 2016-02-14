@@ -29,7 +29,7 @@ g = 0.95;
 i1d = integral(@(x) HG1D(x, g), -1, 1);
 assert(abs(i1d-1)<MAXERROR);
 
-M=80;
+M=10;
 s = FEMAngularGrid(M);
 W = s.w;
 eta = s.ang(:,3);

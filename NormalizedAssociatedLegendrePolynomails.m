@@ -1,6 +1,6 @@
 function n = NormalizedAssociatedLegendrePolynomails(l, m, x)
-%     n = legendre(l,x,'norm');
-%     n = n(abs(m)+1,:);
+    n = legendre(l,x,'norm');
+    n = n(abs(m)+1,:);
     
     n = legendre(l, x);
     if m < 0

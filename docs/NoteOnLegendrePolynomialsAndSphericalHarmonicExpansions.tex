@@ -1,17 +1,78 @@
-\documentclass[•]{article}
+\documentclass{article}
+\newcommand{\ddx}{\frac{\mathrm{d}}{\mathrm{d}x}}
+
 \begin{document}
-\section{Legendre polynomial}
+\tableofcontents
+\section{Jacobi Polynomial}
+\subsection{Definition}
+The Jacobi polynomials, also known as hypergeometric polynomials, occur in the study of rotation groups and in the solution to the equations of motion of the symmetric top. They are solution to the Jacobi differential equation.
+\begin{equation}
+(1-x^2)y''+[\beta-\alpha-(\alpha + \beta +2) x] y' + n(n+\alpha + \beta + 1) y = 0
+\end{equation}
+or
+\begin{equation}
+\ddx [(1-x)^{\alpha+1}(1+x)^{\beta+1}y']+n(n+\alpha + \beta + 1)(1-x)^\alpha(1+x)^\beta y = 0
+\end{equation}
+
+\subsection{Calculation Method}
+The following coefficients have been chosen to get fully normalized.
+
+To calculate $J(n,\alpha, \beta, x)$
+
+define 
+\begin{equation}
+\gamma_0 = \frac{2^{\alpha+\beta + 1}}{\alpha + \beta + 1} \frac{\alpha!\beta!}{(\alpha+\beta)!}
+\end{equation}
+
+\begin{equation}
+J(0,\alpha,\beta,x) = \frac{1}{\sqrt{\gamma_0}}
+\end{equation}
+
+\begin{equation}
+\gamma_1 = \frac{(\alpha+1)*(\beta + 1)}{\alpha+\beta + 3} \gamma_0
+\end{equation}
+
+\begin{equation}
+J(1,\alpha,\beta,x) = \frac{\frac{\alpha+\beta+2}{2}x+\frac{\alpha-\beta}{2}}{\sqrt{\gamma_1}}
+\end{equation}
+
+Then perform forward recurrence for $J(n,\alpha,\beta,x)$.
+
+\begin{equation}
+a_{old} = \frac{2}{2+\alpha+\beta} \sqrt{\frac{(\alpha+1)(\beta+1)}{\alpha+\beta+3}}
+\end{equation}
+
+loop $i$ from $1$ to $n-1$,
+\begin{equation}
+h = 2i+\alpha+\beta
+\end{equation}
+\begin{equation}
+a_{new} = \frac{2}{h+2}*\sqrt{ \frac{(i+1)(i+1+\alpha+\beta)(i+1+\alpha)
+      (i+1+\beta)}{(h+1)(h+3)}};
+\end{equation}
+\begin{equation}
+b_{new} = -\frac{\alpha^2-\beta^2}{h(h+2)}
+\end{equation}
+\begin{equation}
+J(i+1,\alpha,\beta,x) = \frac{1}{a_{new}}(-a_{old}J(i-1,\alpha,\beta,x) + (x-b_{new})J(i,\alpha,\beta,x))
+\end{equation}
+\begin{equation}
+a_{old} = a_{new}
+\end{equation}
+\section{Associated Legendre polynomial}
+\subsection{Definition}
 Associated Legendre Polynomials $P_l^m(x)$ are solutions of the differential equation
 \begin{equation}
 (1 - x^2) \frac{d^2 P_l^m(x)}{ dx^2 }P_l^m(x) - 2x \frac{d}{dx
 } P_l^m(x) +
 ( l(l+1) - m^2 / (1 - x^2) ) P_l^m(x) = 0
 \end{equation}
-Calculate command:
-\begin{itemize}
-\item MATLAB legendre(l,x)
-\item Boost 
-\end{itemize}
+\subsection{Calculation}
+Using Command as follows:
+
+MATLAB: legendre(n,x,'norm');
+GSL: ???
+
 
 \subsection{Full Normalization}
 The full normalization form of Legendre polynomial is
@@ -31,7 +92,24 @@ The derivation of Legendre Polynomial is defined as
 \begin{equation}
 \frac{d P_l(x)}{dx} =  J_{(l-1)}^{(1,1)}(x)
 \end{equation}
+\subsection{Calculation}
+Using Jacobi Polynomial defined above, we use the following equation:
+\begin{equation}
+\ddx P_l(x) = \sqrt{l(l+1)}J(l-1,1,1)(x)
+\end{equation}
 \section{Spherical harmonic functions}
+\subsection{Definition}
+\subsection{Calculation}
+We can use normalized associated Legendre polynomial to calculate spherical harmonic basis:
+\begin{equation}
+Y_l^m(\theta, \phi) = \frac{1}{\sqrt{\pi}}P_l^m(\cos \theta) sin(m\phi), m>0
+\end{equation}
+\begin{equation}
+Y_l^m(\theta, \phi) = \frac{1}{\sqrt{2\pi}}P_l^m(\cos \theta), m=0
+\end{equation}
+\begin{equation}
+Y_l^m(\theta, \phi) = \frac{1}{\sqrt{\pi}}P_l^{-m}(\cos \theta) cos(-m\phi), m<0
+\end{equation}
 \section{Relations}
 \subsection{Spherical Harmonic Addition Theorem}
 A formula also known as the Legendre addition theorem which is derived by finding Green's functions for the spherical harmonic expansion and equating them to the generating function for Legendre polynomials. When $\gamma$ is defined by
@@ -40,6 +118,10 @@ A formula also known as the Legendre addition theorem which is derived by findin
 \end{equation}
 The Legendre polynomial of argument $\gamma$ is given by
 \begin{equation}
-P_l(\cos \gamma) = \frac{4\pi}{2l+1}\sum_{m=-l}^l (-1)^m Y^m_l(\theta_1,\phi_1) Y^m_l(\theta_2, \phi_2)
+P_l(\cos \gamma) = \frac{4\pi}{2l+1}\sum_{m=-l}^l (-1)^m Y^m_l(\theta_1,\phi_1) \bar{Y}^m_l(\theta_2, \phi_2)
+\end{equation}
+However since we are using normalized Legendre Polynomial:
+\begin{equation}
+N_l^m = \frac{2\pi}{\sqrt{l+1/2}}\sum_{m=-l}^l Y^m_l(\theta_1,\phi_1) Y^m_l(\theta_2, \phi_2)
 \end{equation}
 \end{document}
